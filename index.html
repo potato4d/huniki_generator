@@ -40,9 +40,9 @@ var draw = function(){
   context.drawImage(template, 0, 0, 600, 360);
   tategaki(context, text, 100, 145);
   if(text != ""){
-    history.replaceState(null, null, '?text=' + text);
+    history.replaceState(null, null, '/huniki_generator/?text=' + text);
   }else{
-    history.replaceState(null, null, '/');
+    history.replaceState(null, null, '/huniki_generator/');
   }
   makeURL();
 }
