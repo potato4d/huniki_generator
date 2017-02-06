@@ -7,10 +7,68 @@
 </head>
 <body>
   <h1>俺達は雰囲気でジェネレーターをやっている</h1>
-  <canvas width="600" height="360" id="canvas">
-  「ぜんぜんわからない　俺達は雰囲気で<input type="text" placeholder="株">をやっている」
-<script>
+  <canvas width="600" height="360" id="canvas"></canvas>
+  <p>「ぜんぜんわからない　俺達は雰囲気で<input type="text" placeholder="株">をやっている」</p>
 
+  <a href=""></a>
+<script>
+var canvas;
+var context;
+var template;
+var text;
+var $ = function(e){
+  return document.querySelector(e);
+}
+
+window.addEventListener("load", function(){
+  canvas = $("#canvas");
+  context = canvas.getContext('2d');
+  template = new Image();
+  context.font = "16px 'Hiragino Sans, Meiryo'";
+  text = "text" in getQuery() ? getQuery().text : "";
+  template.src = "/template.png"
+  template.onload = draw;
+});
+
+$("input").addEventListener("keyup", function(e){
+  text = $("input").value;
+  draw();
+})
+
+var draw = function(){
+  context.drawImage(template, 0, 0, 600, 360);
+  tategaki(context, text, 100, 145);
+  if(text != ""){
+    history.replaceState(null, null, '?text=' + text);
+  }else{
+    history.replaceState(null, null, '/');
+  }
+}
+
+var tategaki = function(context, text, x, y) {
+  var textList = text.split('\n');
+  var lineHeight = context.measureText("あ").width;
+  textList.forEach(function(elm, i) {
+    Array.prototype.forEach.call(elm, function(ch, j) {
+      if(ch == "ー") ch = "┃";
+      context.fillText(ch, x-lineHeight*i, y+(lineHeight+1)*j);
+    });
+  });
+};
+
+var getQuery = function(){
+  var vars = [], max = 0, hash = "", array = "";
+  var url = window.location.search;
+  hash  = url.slice(1).split('&');
+  max = hash.length;
+  for (var i = 0; i < max; i++) {
+      array = hash[i].split('=');    //keyと値に分割。
+      vars.push(array[0]);    //末尾にクエリ文字列のkeyを挿入。
+      vars[array[0]] = array[1];    //先ほど確保したkeyに、値を代入。
+  }
+  return vars;
+}
 </script>
+
 </body>
 </html>
