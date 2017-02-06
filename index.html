@@ -27,7 +27,7 @@ window.addEventListener("load", function(){
   template = new Image();
   context.font = "16px 'Hiragino Sans, Meiryo'";
   text = "text" in getQuery() ? decodeURI(getQuery().text) : "";
-  template.src = "template.png"
+  template.src = "./template.png"
   template.onload = draw;
 });
 
