@@ -8,9 +8,10 @@
 <body>
   <h1>俺達は雰囲気でジェネレーターをやっている</h1>
   <canvas width="600" height="360" id="canvas"></canvas>
+  <p><small>クリックで生成した画像を保存できます</small></p>
   <p>「ぜんぜんわからない　俺達は雰囲気で<input type="text" placeholder="株">をやっている」</p>
 
-  <a href=""></a>
+  <a href="https://twitter.com/" target="_blank">ツイートする</a>
 <script>
 var canvas;
 var context;
@@ -25,8 +26,8 @@ window.addEventListener("load", function(){
   context = canvas.getContext('2d');
   template = new Image();
   context.font = "16px 'Hiragino Sans, Meiryo'";
-  text = "text" in getQuery() ? getQuery().text : "";
-  template.src = "/template.png"
+  text = "text" in getQuery() ? decodeURI(getQuery().text) : "";
+  template.src = "template.png"
   template.onload = draw;
 });
 
@@ -43,6 +44,7 @@ var draw = function(){
   }else{
     history.replaceState(null, null, '/');
   }
+  makeURL();
 }
 
 var tategaki = function(context, text, x, y) {
@@ -67,6 +69,11 @@ var getQuery = function(){
       vars[array[0]] = array[1];    //先ほど確保したkeyに、値を代入。
   }
   return vars;
+}
+
+var makeURL = function(){
+  var base = "https://twitter.com/intent/tweet?text=「ぜんぜんわからない　俺達は雰囲気で";
+  $("a").setAttribute("href", base + text + "をやっている」&hashtags=huniki_generator" + "&url=https://potato4d.github.io/huniki-generator")
 }
 </script>
 
