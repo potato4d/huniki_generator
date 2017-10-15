@@ -73,7 +73,7 @@ var getQuery = function(){
 
 var makeURL = function(){
   var base = "https://twitter.com/intent/tweet?text=「ぜんぜんわからない　俺達は雰囲気で";
-  $("a").setAttribute("href", base + text + "をやっている」&hashtags=huniki_generator" + "&url=" + location.href )
+  $("a").setAttribute("href", base + text + "をやっている」&hashtags=huniki_generator" + "&url=" + encodeURIComponent(location.href) )
 }
 </script>
 
