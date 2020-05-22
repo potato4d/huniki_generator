@@ -25,7 +25,7 @@ window.addEventListener("load", function(){
   canvas = $("#canvas");
   context = canvas.getContext('2d');
   template = new Image();
-  context.font = "16px 'Hiragino Sans, Meiryo'";
+  context.font = "20px 'Hiragino Sans, Meiryo'";
   text = "text" in getQuery() ? decodeURI(getQuery().text) : "";
   template.src = "./template.png"
   template.onload = draw;
@@ -38,7 +38,7 @@ $("input").addEventListener("keyup", function(e){
 
 var draw = function(){
   context.drawImage(template, 0, 0, 600, 360);
-  tategaki(context, text, 100, 145);
+  tategaki(context, text, 95, 148);
   if(text != ""){
     history.replaceState(null, null, '/huniki_generator/?text=' + text);
   }else{
